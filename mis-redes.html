@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>Mis redes</title>
+<meta name="description" content="Todas mis redes en un solo lugar">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mis-redes.css">
+<link rel="stylesheet" href="mis-redes-movil.css" media="(max-width: 480px)">
+</head>
+<body>
+<main>
+  <div class="avatar-wrap">
+    <img class="avatar" id="avatar" alt="Logo de Parfam Avix">
+  </div>
+  <div class="name-card">
+    <h1 id="name"></h1>
+  </div>
+  <p class="bio" id="bio"></p>
+  <div id="links"></div>
+  <footer id="footer"></footer>
+</main>
+
+<script>
+/* ============ EDITA SOLO ESTA SECCIÓN ============ */
+const PERFIL = {
+  nombre: "PARFAM AVIX ",
+  bio: "Perfumeria",
+  bio: "San Andres Tuxtla Veracruz, MX",
+  foto: "avix-logo-glow.png",     // logo con fondo recortado, junto a este archivo
+};
+
+// "icono" = nombre en https://simpleicons.org (ej: tiktok, instagram, youtube, x, facebook, whatsapp, spotify, twitch, telegram, github, linkedin)
+const REDES = [
+  { nombre: "TikTok",    icono: "tiktok",    url: "https://www.tiktok.com/@parfam_avix?is_from_webapp=1&sender_device=pc" },
+  { nombre: "Instagram", icono: "instagram", url: "https://www.instagram.com/parfam_avix?gwpx=YTE1dHN6bXc2M21j" },
+  { nombre: "Facebook",  icono: "facebook",  url: "https://www.facebook.com/share/1FXLtD5ABk/" },
+  { nombre: "Grupo WhatsApp",  icono: "whatsapp",  url: "https://whatsapp.com/channel/0029VbBqxkJE50UcQxGa1Y3Y" },
+  { nombre: "Pedido WhatsApp",  icono: "whatsapp",  url: "https://wa.me/message/ZDND3ZIBJVVJO1" },
+];
+/* ================================================= */
+
+/* Color de iluminación de cada app (R, G, B) */
+const COLORES = {
+  tiktok:    { glow: "37,244,238",  glow2: "254,44,85" },
+  instagram: { glow: "225,48,108",  glow2: "131,58,180" },
+  facebook:  { glow: "24,119,242",  glow2: "66,103,178" },
+  whatsapp:  { glow: "37,211,102",  glow2: "18,140,126" },
+  youtube:   { glow: "255,0,0",     glow2: "255,0,0" },
+  x:         { glow: "255,255,255", glow2: "160,160,160" },
+  spotify:   { glow: "30,215,96",   glow2: "30,215,96" },
+  telegram:  { glow: "38,165,228",  glow2: "38,165,228" },
+  twitch:    { glow: "145,70,255",  glow2: "145,70,255" },
+  github:    { glow: "255,255,255", glow2: "160,160,160" },
+  linkedin:  { glow: "10,102,194",  glow2: "10,102,194" },
+};
+
+document.title = PERFIL.nombre + " · Mis redes";
+document.getElementById("name").textContent = PERFIL.nombre;
+document.getElementById("bio").textContent = PERFIL.bio;
+document.getElementById("avatar").src = PERFIL.foto;
+document.getElementById("footer").textContent = "© " + new Date().getFullYear() + " " + PERFIL.nombre;
+
+const cont = document.getElementById("links");
+REDES.forEach(r => {
+  const color = COLORES[r.icono] || { glow: "217,180,90", glow2: "217,180,90" };
+  const a = document.createElement("a");
+  a.className = "link";
+  if (r.icono === "tiktok") a.classList.add("is-tiktok");
+  a.href = r.url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.style.setProperty("--glow", color.glow);
+  a.style.setProperty("--glow2", color.glow2);
+  a.innerHTML = `
+    <span class="icon-box"><img class="icon" src="https://cdn.simpleicons.org/${r.icono}/white" alt=""></span>
+    <span class="label"></span>
+    <span class="arrow" aria-hidden="true">↗</span>`;
+  a.querySelector(".label").textContent = r.nombre;
+  cont.appendChild(a);
+});
+</script>
+</body>
+</html>
