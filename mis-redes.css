@@ -1,12 +1,12 @@
 /* ==========================================================================
-   PARFAM AVIX · Mis redes · Base + computadora
+   PARFAM AVIX · Mis redes · Hoja de estilos única
    --------------------------------------------------------------------------
-   Aquí vive:
+   Aquí vive todo, en un solo archivo:
      1. Lo compartido: colores, fondo, tipografías, hover, TikTok.
-     2. Los tamaños de la versión de computadora (desde 481 px).
+     2. Los tamaños de computadora, que son los valores base.
+     3. Los ajustes de móvil (hasta 480 px) al final.
 
-   La versión móvil está en "mis-redes-movil.css" (hasta 480 px).
-   Cada versión usa una media query opuesta, así que no se pisan.
+   No hay CSS aparte: el móvil ya no depende de que exista otro archivo.
 
    Clases que crea el script (NO están escritas en el HTML):
      .link      -> cada enlace generado por REDES.forEach()
@@ -23,7 +23,7 @@
      4. Enlaces e iluminación por red
      5. TikTok (dos colores)
      6. Pie de página
-     7. Computadora (desde 481 px)
+     7. Ajustes para móvil (hasta 480 px)
      8. Táctil y movimiento reducido
    ========================================================================== */
 
@@ -45,6 +45,7 @@ body {
   min-height: 100dvh;
   display: flex;
   justify-content: center;
+  padding: 56px 16px 40px;
   overflow-x: hidden;
   color: var(--text);
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -95,6 +96,8 @@ main {
    ========================================================================== */
 .avatar-wrap {
   position: relative;
+  width: 142px;
+  height: 142px;
   margin: 0 auto 18px;
   display: grid;
   place-items: center;
@@ -156,8 +159,10 @@ main {
    ========================================================================== */
 h1 {
   font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.85rem;
   font-weight: 500;
   line-height: 1.15;
+  letter-spacing: .12em;
   background: linear-gradient(180deg, #fffaf0 0%, #f6e3a8 42%, #d3a94e 72%, #a97f27 100%);
   -webkit-background-clip: text;
           background-clip: text;
@@ -165,18 +170,54 @@ h1 {
   filter: drop-shadow(0 2px 18px rgba(255, 205, 60, .22));
 }
 
+/* El nombre con el mismo recuadro de cristal de los enlaces, en dorado */
+.name-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 66px;
+  padding: 14px 18px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--gold), .22);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(var(--gold), .075), rgba(var(--gold), .015)),
+    linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 200, .10),
+    0 0 26px rgba(var(--gold), .10),
+    0 12px 30px -22px #000;
+}
 
-
+.name-card::after {
+  content: "";
+  position: absolute;
+  inset: -40% -10%;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--gold), .20), rgba(var(--gold), 0) 62%);
+}
 
 .bio {
   margin: 14px 0 30px;
+  font-size: .7rem;
   font-weight: 500;
   line-height: 1.7;
+  letter-spacing: .24em;
   text-transform: uppercase;
   color: #cbbb93;
 }
 
-
+.bio::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(var(--gold), .75), transparent);
+}
 
 /* ==========================================================================
    4. Enlaces e iluminación por red
@@ -194,6 +235,9 @@ a.link {
   isolation: isolate;
   display: flex;
   align-items: center;
+  gap: 14px;
+  min-height: 66px;
+  padding: 11px 16px 11px 13px;
   overflow: hidden;
   border: 1px solid var(--card-line);
   border-radius: 16px;
@@ -269,13 +313,19 @@ a.link:focus-visible {
   z-index: 1;
   display: grid;
   place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 12px;
   background: rgba(255, 255, 255, .045);
   transition: background .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease;
 }
 
 .icon {
   display: block;
+  width: 22px;
+  height: 22px;
   transition: filter .3s ease, transform .3s ease;
 }
 
@@ -386,35 +436,35 @@ footer {
 }
 
 /* ==========================================================================
-   7. COMPUTADORA · desde 481 px
+   7. AJUSTES PARA MÓVIL · hasta 480 px
    --------------------------------------------------------------------------
-   Solo tamaños y espacios. Si cambias algo aquí, no afecta al móvil.
+   Solo tamaños y espacios. Nada de colores ni efectos: eso está arriba.
    ========================================================================== */
-@media (min-width: 481px) {
-  body { padding: 56px 16px 40px; }
+@media (max-width: 480px) {
+  body { padding: 40px 14px 32px; }
 
-  .avatar-wrap { width: 142px; height: 142px; }
+  .avatar-wrap { width: 124px; height: 124px; }
 
-  h1 { font-size: 1.85rem; letter-spacing: .12em; }
+  h1 { font-size: 1.4rem; letter-spacing: .09em; }
 
-  .name-card { min-height: 66px; padding: 14px 18px; }
+  .name-card { min-height: 62px; padding: 12px 14px; }
 
-  .bio { font-size: .7rem; letter-spacing: .24em; }
+  .bio { font-size: .65rem; letter-spacing: .17em; }
 
   a.link {
-    min-height: 66px;
-    padding: 11px 16px 11px 13px;
-    gap: 14px;
+    min-height: 62px;
+    padding: 10px 14px 10px 11px;
+    gap: 12px;
   }
 
   .icon-box {
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
   }
 
-  .icon { width: 22px; height: 22px; }
+  .icon { width: 20px; height: 20px; }
 }
 
 /* ==========================================================================
@@ -440,54 +490,3 @@ footer {
     transition-duration: .01ms !important;
   }
 }
-  
-
-/* ==========================================================================
-   Versión móvil
-   ========================================================================== */
-
-@media (max-width: 480px) {
-
-  body {
-    padding: 40px 14px 32px;
-  }
-
-  .avatar-wrap {
-    width: 124px;
-    height: 124px;
-  }
-
-  h1 {
-    font-size: 1.4rem;
-    letter-spacing: .09em;
-  }
-
-  .name-card {
-    min-height: 62px;
-    padding: 12px 14px;
-  }
-
-  .bio {
-    font-size: .65rem;
-    letter-spacing: .17em;
-  }
-
-  a.link {
-    min-height: 62px;
-    padding: 10px 14px 10px 11px;
-    gap: 12px;
-  }
-
-  .icon-box {
-    flex: 0 0 38px;
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  }
